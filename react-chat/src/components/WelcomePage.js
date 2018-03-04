@@ -1,5 +1,6 @@
 
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import { withStyles } from 'material-ui';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -9,6 +10,7 @@ import Paper from 'material-ui/Paper';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Login from './Login';
 import Signup from './Signup';
+
 const styles = theme => ({
   paper: {
     marginTop: 64 + theme.spacing.unit * 3,
@@ -29,9 +31,13 @@ class WelcomePage extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, signup, login, isAuthenticated } = this.props;
     const { activeTab } = this.state;
-
+    if (isAuthenticated) {
+     return (
+     <Redirect to ="/chat"/>
+     );
+    }
     return (
       <React.Fragment>
         <AppBar>
@@ -55,8 +61,8 @@ class WelcomePage extends React.Component {
                 </Tabs>
               </AppBar>
               <div className={classes.tabContent}>
-                {activeTab === 0 && <Login />}
-                {activeTab === 1 && <Signup />}
+                {activeTab === 0 && <Login onSubmit={login}   />}
+                {activeTab === 1 && <Signup onSubmit ={signup} />}
               </div>
             </Paper>
           </Grid>

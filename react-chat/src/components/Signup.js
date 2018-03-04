@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from 'material-ui';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import fetch from 'isomorphic-fetch';
+
 const styles = theme => ({
   signUpButton: {
     marginTop: theme.spacing.unit * 2,
@@ -54,26 +54,9 @@ class Signup extends React.Component {
     if (!this.validate()) {
       return;
     } 
-
-    const { username, password } = this.state;
-
-    console.log('Sign up:', username.value, password.value);
-
-        fetch('http://localhost:8000/v1/signup', {
-      method: "POST",
-      body: JSON.stringify({
-        username: username.value,
-        password: password.value,
-      }),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(json => console.log(json))
-      .catch(reason => console.error(reason));
-   }
+    const { username, password } = this.state; 
+    this.props.onSubmit(username.value, password.value);
+  }
   render() {
     const { classes } = this.props;
     const { username, password, repeatedPassword } = this.state;
