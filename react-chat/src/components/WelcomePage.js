@@ -1,46 +1,43 @@
-
-import React from 'react';
-import {Redirect} from 'react-router-dom';
-import { withStyles } from 'material-ui';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography'
-import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Login from './Login';
-import Signup from './Signup';
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { withStyles } from "material-ui";
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
+import Grid from "material-ui/Grid";
+import Paper from "material-ui/Paper";
+import Tabs, { Tab } from "material-ui/Tabs";
+import Login from "./Login";
+import Signup from "./Signup";
 
 const styles = theme => ({
   paper: {
     marginTop: 64 + theme.spacing.unit * 3,
-    width: 500,
+    width: 500
   },
   tabContent: {
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 3
   }
-})
+});
 
 class WelcomePage extends React.Component {
   state = {
-    activeTab: 0,
-  }
+    activeTab: 0
+  };
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.recieveAuth();
   }
 
   handleTabChage = (event, value) => {
     this.setState({ activeTab: value });
-  }
+  };
 
   render() {
     const { classes, signup, login, isAuthenticated } = this.props;
     const { activeTab } = this.state;
     if (isAuthenticated) {
-     return (
-     <Redirect to ="/chat"/>
-     );
+      return <Redirect to="/chat" />;
     }
     return (
       <React.Fragment>
@@ -65,8 +62,8 @@ class WelcomePage extends React.Component {
                 </Tabs>
               </AppBar>
               <div className={classes.tabContent}>
-                {activeTab === 0 && <Login onSubmit={login}   />}
-                {activeTab === 1 && <Signup onSubmit ={signup} />}
+                {activeTab === 0 && <Login onSubmit={login} />}
+                {activeTab === 1 && <Signup onSubmit={signup} />}
               </div>
             </Paper>
           </Grid>

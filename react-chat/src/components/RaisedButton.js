@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "material-ui/styles";
+import Button from "material-ui/Button";
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   input: {
-    display: 'none',
-  },
+    display: "none"
+  }
 });
 
 function RaisedButtons(props) {
@@ -25,7 +25,12 @@ function RaisedButtons(props) {
       <Button variant="raised" color="secondary" className={classes.button}>
         Secondary
       </Button>
-      <Button variant="raised" color="secondary" disabled className={classes.button}>
+      <Button
+        variant="raised"
+        color="secondary"
+        disabled
+        className={classes.button}
+      >
         Disabled
       </Button>
       <input
@@ -45,7 +50,7 @@ function RaisedButtons(props) {
 }
 
 RaisedButtons.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(RaisedButtons);

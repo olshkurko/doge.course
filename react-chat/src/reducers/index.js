@@ -1,6 +1,34 @@
-import { combineReducers} from 'redux';
-import auth from './Auth';
+import { combineReducers } from "redux";
+import auth from "./Auth";
+import chats from "./chat";
+import messages from "./messages";
 
 export default combineReducers({
-auth,
+  auth,
+  chats,
+  messages
 });
+
+export const getActiveUser = state => state.auth.user;
+export const getUserId = user => user._id;
+
+export const isCreator = (state, chat) => {
+  try {
+    return getUserId(chat.creator) === getUserId(getActiveUser(state));
+  } catch (e) {
+    return false;
+  }
+};
+export const isMember = (state, chat) => {
+  try {
+    return chat.members.some(
+      member => getUserId(member) === getUserId(getActiveUser(state))
+    );
+  } catch (e) {
+    return false;
+  }
+};
+
+export const isChatMember = (state, chat) => {
+  return isCreator(state, chat) || isMember(state, chat);
+};

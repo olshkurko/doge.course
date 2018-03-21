@@ -1,29 +1,29 @@
-import React from 'react';
-import { withStyles } from 'material-ui';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
+import React from "react";
+import { withStyles } from "material-ui";
+import TextField from "material-ui/TextField";
+import Button from "material-ui/Button";
 
 const styles = theme => ({
   signUpButton: {
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 2
   }
-})
+});
 
 class Signup extends React.Component {
   state = {
     username: {
-      value: '',
-      isValid: true,
+      value: "",
+      isValid: true
     },
     password: {
-      value: '',
-      isValid: true,
+      value: "",
+      isValid: true
     },
     repeatedPassword: {
-      value: '',
-      isValid: true,
-    },
-  }
+      value: "",
+      isValid: true
+    }
+  };
 
   validate = () => {
     const { password, repeatedPassword } = this.state;
@@ -31,32 +31,31 @@ class Signup extends React.Component {
 
     this.setState({
       password: { ...password, isValid },
-      repeatedPassword: { ...repeatedPassword, isValid },
+      repeatedPassword: { ...repeatedPassword, isValid }
     });
 
     return isValid;
-  }
+  };
 
-
-  handleInputChange = (event) => {
+  handleInputChange = event => {
     event.persist();
-    const {name, value} = event.target;
-    this.setState((prevState) => ({
+    const { name, value } = event.target;
+    this.setState(prevState => ({
       [name]: {
         ...prevState[name],
-        value,
+        value
       }
     }));
-  }
-  handleSubmit = (event) => {
+  };
+  handleSubmit = event => {
     event.preventDefault();
 
     if (!this.validate()) {
       return;
-    } 
-    const { username, password } = this.state; 
+    }
+    const { username, password } = this.state;
     this.props.onSubmit(username.value, password.value);
-  }
+  };
   render() {
     const { classes } = this.props;
     const { username, password, repeatedPassword } = this.state;
@@ -69,7 +68,7 @@ class Signup extends React.Component {
           label="Username"
           placeholder="Type your username..."
           type="text"
-          name = "username"
+          name="username"
           margin="normal"
           autoComplete="username"
           value={username.value}
@@ -82,20 +81,20 @@ class Signup extends React.Component {
           label="Password"
           placeholder="Type your password..."
           type="password"
-          name ="password"
+          name="password"
           margin="normal"
           autoComplete="new-password"
           value={password.value}
           onChange={this.handleInputChange}
           error={!password.isValid}
         />
-         <TextField
+        <TextField
           required
           fullWidth
           label="Repeat password"
           placeholder="Repeat your password..."
           type="password"
-          name = "repeatedPassword"
+          name="repeatedPassword"
           margin="normal"
           autoComplete="new-password"
           value={repeatedPassword.value}

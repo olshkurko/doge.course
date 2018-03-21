@@ -1,26 +1,58 @@
-import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Sidebar from './SideBar';
-import Header from './Header';
-import Chat from './Chat';
-import { chats, messages } from '../mock-data';
+import React from "react";
+import Sidebar from "./SideBar";
+import Header from "./Header";
+import Chat from "./Chat";
 
-const styles = theme => ({
-  root: {
-    position: 'relative',
-    display: 'flex',
-    width: '100%',
-    height: '100%',
-    backgroundColor: theme.palette.background.default,
-  },
-});
+class ChatPage extends React.Component {
+  componentDidMount() {
+    const { match, fetchAllChats, fetchMyChats, setActiveChat } = this.props;
 
-const ChatPage = ({classes}) => (
-  <div className={classes.root}>
-    <Header />
-    <Sidebar chats={chats} />
-    <Chat messages={messages}/>
-  </div>
-);
+    Promise.all([fetchAllChats(), fetchMyChats()]).then(() => {
+      if (match.params.chatId) {
+        setActiveChat(match.params.chatId);
+      }
+    });
+  }
+  componentWillReceiveProps(nextProps) {
+    const { match: { params }, setActiveChat } = this.props;
+    const { params: nextParams } = nextProps.match;
+    if (nextParams.chatId && params.chatId !== nextParams.chatId) {
+      setActiveChat(nextParams.chatId);
+    }
+  }
+  render() {
+    const {
+      chats,
+      logout,
+      activeUser,
+      createChat,
+      joinChat,
+      leaveChat,
+      deleteChat,
+      sendMessage,
+      messages,
+      editUser
+    } = this.props;
 
-export default withStyles(styles)(ChatPage);
+    return (
+      <React.Fragment>
+        <Header
+          activeUser={activeUser}
+          activeChat={chats.active}
+          leaveChat={leaveChat}
+          deleteChat={deleteChat}
+          logout={logout}
+          editUser={editUser}
+        />
+        <Sidebar chats={chats} createChat={createChat} />
+        <Chat
+          messages={messages}
+          sendMessage={sendMessage}
+          joinChat={joinChat}
+        />
+      </React.Fragment>
+    );
+  }
+}
+
+export default ChatPage;

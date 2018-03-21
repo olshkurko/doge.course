@@ -1,39 +1,47 @@
-import React from 'react';
-import {bindActionCreators} from 'redux';
-import {Route, Redirect, withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {recieveAuth} from '../actions';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { Route, Redirect, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { recieveAuth } from "../actions/auth";
 
 class PrivateRoute extends React.Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.recieveAuth();
   }
 
-  render(){
-    const {component: Component, isAuthenticated, ...rest} =this.props;
+  render() {
+    const { component: Component, isAuthenticated, ...rest } = this.props;
     return (
-      <Route {...rest} render = {props =>(
-        isAuthenticated ? (
-          <Component {...props}/>
-        ) : (
-          <Redirect to={{
-            pathname: '/welcome',
-            state: {from: props.location}
-          }} />
-        )
-      )} />
+      <Route
+        {...rest}
+        render={props =>
+          isAuthenticated ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/welcome",
+                state: { from: props.location }
+              }}
+            />
+          )
+        }
+      />
     );
   }
 }
 
 const mapStateProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  isAuthenticated: state.auth.isAuthenticated
 });
-const mapDispatchToProps = dispatch => bindActionCreators ({
-  recieveAuth
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      recieveAuth
+    },
+    dispatch
+  );
 
-export default withRouter(connect(
-  mapStateProps,
-  mapDispatchToProps
-)(PrivateRoute));
+export default withRouter(
+  connect(mapStateProps, mapDispatchToProps)(PrivateRoute)
+);
