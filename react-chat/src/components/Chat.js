@@ -29,8 +29,9 @@ const Chat = ({
     <MessageList messages={messages} activeUser={activeUser} />
     {activeChat && (
       <MessageInput
-        sendMessage={content => sendMessage(activeChat._id, content)}
-        showJoinButtonClick={() => joinChat(activeChat._id)}
+        sendMessage={sendMessage}
+        showJoinButton={!activeUser.isChatMember}
+        onJoinButtonClick={() => joinChat(activeChat._id)}
         activeUser={activeUser}
       />
     )}

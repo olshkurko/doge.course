@@ -4,15 +4,20 @@ import { logout } from "../actions/auth";
 import {
   fetchAllChats,
   fetchMyChats,
-  setActiveChats,
+  setActiveChat,
   createChat,
   deleteChat,
   joinChat,
-  leaveChat,
-  sendMessage
-} from "../actions/chat";
+  leaveChat
+} from "../actions/chats";
 import { editUser } from "../actions/users";
-import * as fromChats from "../reducers/chat";
+import {
+  sendMessage,
+  mountChat,
+  unmountChat,
+  socketsConnect
+} from "../actions/sockets";
+import * as fromChats from "../reducers/chats";
 import * as fromState from "../reducers";
 import ChatPage from "../components/ChatPage";
 
@@ -41,13 +46,16 @@ const mapDispatchToProps = dispatch =>
     {
       fetchAllChats,
       fetchMyChats,
-      setActiveChats,
+      setActiveChat,
       logout,
       createChat,
       deleteChat,
       joinChat,
       leaveChat,
       sendMessage,
+      mountChat,
+      unmountChat,
+      socketsConnect,
       editUser
     },
     dispatch

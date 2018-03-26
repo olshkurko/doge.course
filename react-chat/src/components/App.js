@@ -1,5 +1,5 @@
 import React from "react";
-import { withStyles } from "material-ui";
+import { withStyles } from "material-ui/styles";
 import { Router, Route, Redirect } from "react-router-dom";
 import PrivateRoute from "../conteiners/PrivateRoute";
 import ChatPage from "../conteiners/ChatPage";
@@ -10,7 +10,7 @@ import history from "../utils/history";
 const styles = theme => ({
   root: {
     position: "relative",
-    //display: 'flex',
+    display: "flex",
     width: "100%",
     height: "100%",
     backgroundColor: theme.palette.background.default

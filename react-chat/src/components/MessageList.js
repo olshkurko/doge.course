@@ -37,19 +37,24 @@ class MessageList extends React.Component {
   render() {
     const { classes, messages, match, activeUser } = this.props;
 
+    // If there's no active chat, then show a tip
     if (!match.params.chatId) {
       return (
         <Paper className={classes.paper}>
           <Typography variant="display1" gutterBottom>
-            Start talking...
+            Start messaging…
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Use <strong>Recents</strong> to see recent conversations.
+            Use <strong>Global</strong> to explore communities around here.
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            Use <strong>Recents</strong> to see your recent conversations.
           </Typography>
         </Paper>
       );
     }
-    return messages && messages.lenght ? (
+
+    return messages && messages.length ? (
       <div className={classes.messagesWrapper} ref="messagesWrapper">
         {messages.map((message, index) => (
           <Message key={index} activeUser={activeUser} {...message} />

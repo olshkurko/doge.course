@@ -6,9 +6,8 @@ import ChatListItem from "./ChatListItem";
 
 const styles = theme => ({
   chatsList: {
-    height: "calc(100% - 60px)",
-    overflow: "scroll"
-    //overflowY: 'hidden',
+    height: "calc(100% - 56px)",
+    overflowY: "scroll"
   },
   noChats: {
     textAlign: "center"
