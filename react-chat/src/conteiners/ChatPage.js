@@ -37,7 +37,8 @@ const mapStateToProps = state => {
       isCreator: fromState.isCreator(state, activeChat),
       isChatMember: fromState.isChatMember(state, activeChat)
     },
-    messages: state.messages
+    messages: state.messages,
+    error: state.services.errors.chat
   };
 };
 

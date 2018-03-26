@@ -9,6 +9,7 @@ import Paper from "material-ui/Paper";
 import Tabs, { Tab } from "material-ui/Tabs";
 import Login from "./Login";
 import Signup from "./Signup";
+import ErrorMessage from "./ErrorMessage";
 
 const styles = theme => ({
   paper: {
@@ -34,7 +35,7 @@ class WelcomePage extends React.Component {
   };
 
   render() {
-    const { classes, signup, login, isAuthenticated } = this.props;
+    const { classes, signup, login, isAuthenticated, error } = this.props;
     const { activeTab } = this.state;
     if (isAuthenticated) {
       return <Redirect to="/chat" />;
@@ -68,6 +69,7 @@ class WelcomePage extends React.Component {
             </Paper>
           </Grid>
         </Grid>
+        <ErrorMessage error={error} />
       </React.Fragment>
     );
   }
