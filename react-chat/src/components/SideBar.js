@@ -56,7 +56,7 @@ class Sidebar extends React.Component {
   };
 
   render() {
-    const { classes, chats, createChat } = this.props;
+    const { classes, chats, createChat, isConnected } = this.props;
     const { activeTab, searchValue } = this.state;
 
     return (
@@ -77,10 +77,11 @@ class Sidebar extends React.Component {
         </div>
         <Divider />
         <ChatList
+          disabled={!isConnected}
           chats={this.filterChats(activeTab === 0 ? chats.my : chats.all)}
           activeChat={chats.active}
         />
-        <NewChatButton onClick={createChat} />
+        <NewChatButton disabled={!isConnected} onClick={createChat} />
         <BottomNavigation
           value={activeTab}
           onChange={this.handleTabChange}

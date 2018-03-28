@@ -30,7 +30,8 @@ class Header extends React.Component {
       logout,
       leaveChat,
       deleteChat,
-      editUser
+      editUser,
+      isConnected
     } = this.props;
 
     return (
@@ -42,6 +43,7 @@ class Header extends React.Component {
               <Typography variant="title" className={classes.appBarTitle}>
                 {activeChat.title}
                 <ChatMenu
+                  disabled={!isConnected}
                   activeUser={activeUser}
                   onLeaveClick={() => leaveChat(activeChat._id)}
                   onDeleteClick={() => deleteChat(activeChat._id)}
@@ -54,6 +56,7 @@ class Header extends React.Component {
             </Typography>
           )}
           <UserMenu
+            disabled={!isConnected}
             activeUser={activeUser}
             onLogoutClick={logout}
             onEditProfileClick={editUser}

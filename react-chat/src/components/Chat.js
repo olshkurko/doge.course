@@ -23,12 +23,14 @@ const Chat = ({
   activeChat,
   activeUser,
   joinChat,
-  sendMessage
+  sendMessage,
+  isConnected
 }) => (
   <main className={classes.chatLayout}>
     <MessageList messages={messages} activeUser={activeUser} />
     {activeChat && (
       <MessageInput
+        disabled={!isConnected}
         sendMessage={sendMessage}
         showJoinButton={!activeUser.isChatMember}
         onJoinButtonClick={() => joinChat(activeChat._id)}
