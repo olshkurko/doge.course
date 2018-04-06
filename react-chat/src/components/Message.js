@@ -1,41 +1,41 @@
-import React from "react";
-import classNames from "classnames";
-import moment from "moment";
-import { withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
-import Avatar from "./Avatar";
-import Paper from "material-ui/Paper";
+import React from 'react';
+import classNames from 'classnames';
+import moment from 'moment';
+import { withStyles } from 'material-ui/styles';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+import Avatar from './Avatar';
 
-import senderName from "../utils/SenderName";
-import randomColor from "../utils/ColorFrom";
+import senderName from '../utils/SenderName';
+import randomColor from '../utils/ColorFrom';
 
 const styles = theme => ({
   messageWrapper: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 3}px`
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 3}px`,
   },
   messageWrappperFromMe: {
-    justifyContent: "flex-end"
+    justifyContent: 'flex-end',
   },
   message: {
-    maxWidth: "70%",
-    minWidth: "10%",
+    maxWidth: '70%',
+    minWidth: '10%',
     padding: theme.spacing.unit,
-    marginLeft: theme.spacing.unit * 2
+    marginLeft: theme.spacing.unit * 2,
   },
   messageFromMe: {
     marginRight: theme.spacing.unit * 2,
-    backgroundColor: "#e6dcff"
+    backgroundColor: '#e6dcff',
   },
   statusMessage: {
-    width: "100%",
-    textAlign: "center"
+    width: '100%',
+    textAlign: 'center',
   },
   statusMessageUser: {
-    display: "inline"
-  }
+    display: 'inline',
+  },
 });
 
 const Message = ({
@@ -44,7 +44,7 @@ const Message = ({
   sender,
   activeUser,
   createdAt,
-  statusMessage
+  statusMessage,
 }) => {
   const isMessageFromMe = sender._id === activeUser._id;
 
@@ -76,14 +76,14 @@ const Message = ({
     <div
       className={classNames(
         classes.messageWrapper,
-        isMessageFromMe && classes.messageWrappperFromMe
+        isMessageFromMe && classes.messageWrappperFromMe,
       )}
     >
       {!isMessageFromMe && userAvatar}
       <Paper
         className={classNames(
           classes.message,
-          isMessageFromMe && classes.messageFromMe
+          isMessageFromMe && classes.messageFromMe,
         )}
       >
         <Typography

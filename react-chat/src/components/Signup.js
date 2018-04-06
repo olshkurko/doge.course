@@ -1,28 +1,28 @@
-import React from "react";
-import { withStyles } from "material-ui/styles";
-import TextField from "material-ui/TextField";
-import Button from "material-ui/Button";
+import React from 'react';
+import { withStyles } from 'material-ui/styles';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
 
 const styles = theme => ({
   signUpButton: {
-    marginTop: theme.spacing.unit * 2
-  }
+    marginTop: theme.spacing.unit * 2,
+  },
 });
 
 class Signup extends React.Component {
   state = {
     username: {
-      value: "",
-      isValid: true
+      value: '',
+      isValid: true,
     },
     password: {
-      value: "",
-      isValid: true
+      value: '',
+      isValid: true,
     },
     repeatedPassword: {
-      value: "",
-      isValid: true
-    }
+      value: '',
+      isValid: true,
+    },
   };
 
   validate = () => {
@@ -31,23 +31,23 @@ class Signup extends React.Component {
 
     this.setState({
       password: { ...password, isValid },
-      repeatedPassword: { ...repeatedPassword, isValid }
+      repeatedPassword: { ...repeatedPassword, isValid },
     });
 
     return isValid;
   };
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     event.persist();
     const { name, value } = event.target;
     this.setState(prevState => ({
       [name]: {
         ...prevState[name],
-        value
-      }
+        value,
+      },
     }));
   };
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     if (!this.validate()) {

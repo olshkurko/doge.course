@@ -1,8 +1,8 @@
-import React from "react";
-import Sidebar from "./SideBar";
-import Header from "./Header";
-import Chat from "./Chat";
-import ErrorMessage from "./ErrorMessage";
+import React from 'react';
+import Sidebar from './SideBar';
+import Header from './Header';
+import Chat from './Chat';
+import ErrorMessage from './ErrorMessage';
 
 class ChatPage extends React.Component {
   componentDidMount() {
@@ -12,7 +12,7 @@ class ChatPage extends React.Component {
       fetchMyChats,
       setActiveChat,
       socketsConnect,
-      mountChat
+      mountChat,
     } = this.props;
 
     Promise.all([fetchAllChats(), fetchMyChats()])
@@ -32,7 +32,7 @@ class ChatPage extends React.Component {
       match: { params },
       setActiveChat,
       unmountChat,
-      mountChat
+      mountChat,
     } = this.props;
     const { params: nextParams } = nextProps.match;
     if (nextParams.chatId && params.chatId !== nextParams.chatId) {
@@ -54,7 +54,7 @@ class ChatPage extends React.Component {
       messages,
       editUser,
       error,
-      isConnected
+      isConnected,
     } = this.props;
 
     return (

@@ -1,53 +1,54 @@
-import React from "react";
-import { withStyles } from "material-ui/styles";
-import AddIcon from "material-ui-icons/Add";
-import Modal from "material-ui/Modal";
-import Typography from "material-ui/Typography";
-import Paper from "material-ui/Paper";
-import TextField from "material-ui/TextField";
-import Button from "material-ui/Button";
+import React from 'react';
+import { withStyles } from 'material-ui/styles';
+import AddIcon from 'material-ui-icons/Add';
+import Modal from 'material-ui/Modal';
+import Typography from 'material-ui/Typography';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
+
 const styles = theme => ({
   newChatButton: {
-    position: "absolute",
-    left: "auto",
+    position: 'absolute',
+    left: 'auto',
     right: theme.spacing.unit * 3,
-    bottom: theme.spacing.unit * 3 + 48 // + bottom navigation
+    bottom: (theme.spacing.unit * 3) + 48, // + bottom navigation
   },
   modalWrapper: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modal: {
-    width: "30%",
-    minWidth: "300px",
-    padding: theme.spacing.unit * 3
-  }
+    width: '30%',
+    minWidth: '300px',
+    padding: theme.spacing.unit * 3,
+  },
 });
 
 class newChatButton extends React.Component {
   state = {
     open: false,
     title: {
-      value: "",
-      isValid: true
-    }
+      value: '',
+      isValid: true,
+    },
   };
 
   toggleModal = () => {
     this.setState({ open: !this.state.open });
   };
 
-  handleTitleChange = event => {
+  handleTitleChange = (event) => {
     this.setState({
       title: {
         value: event.target.value,
-        isValid: true
-      }
+        isValid: true,
+      },
     });
   };
 
-  handleCreateClick = event => {
+  handleCreateClick = (event) => {
     event.preventDefault();
 
     const { title } = this.state;
@@ -56,8 +57,8 @@ class newChatButton extends React.Component {
       this.setState({
         title: {
           value: title.value,
-          isValid: false
-        }
+          isValid: false,
+        },
       });
 
       return;
@@ -67,9 +68,9 @@ class newChatButton extends React.Component {
     this.toggleModal();
     this.setState({
       title: {
-        value: "",
-        isValid: true
-      }
+        value: '',
+        isValid: true,
+      },
     });
   };
 

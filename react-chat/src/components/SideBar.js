@@ -1,69 +1,68 @@
-import React from "react";
-import { withStyles } from "material-ui/styles";
-import Drawer from "material-ui/Drawer";
-import Divider from "material-ui/Divider";
-import TextField from "material-ui/TextField";
+import React from 'react';
+import { withStyles } from 'material-ui/styles';
+import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
+import TextField from 'material-ui/TextField';
 import BottomNavigation, {
-  BottomNavigationAction
-} from "material-ui/BottomNavigation";
-import ChatList from "./ChatList";
-import NewChatButton from "./NewChatButton";
-import RestoreIcon from "material-ui-icons/Restore";
-import ExploreIcon from "material-ui-icons/Explore";
+  BottomNavigationAction,
+} from 'material-ui/BottomNavigation';
+import RestoreIcon from 'material-ui-icons/Restore';
+import ExploreIcon from 'material-ui-icons/Explore';
+import ChatList from './ChatList';
+import NewChatButton from './NewChatButton';
 
 const styles = theme => ({
   drawerPaper: {
-    position: "relative",
-    height: "100%",
-    width: 320
+    position: 'relative',
+    height: '100%',
+    width: 320,
   },
   drawerHeader: {
     ...theme.mixins.toolbar,
     paddingLeft: theme.spacing.unit * 3,
-    paddingRight: theme.spacing.unit * 3
-  }
+    paddingRight: theme.spacing.unit * 3,
+  },
 });
 
 class Sidebar extends React.Component {
   state = {
-    searchValue: "",
-    activeTab: 0
+    searchValue: '',
+    activeTab: 0,
   };
 
-  handleSearchChange = event => {
+  handleSearchChange = (event) => {
     this.setState({
-      searchValue: event.target.value
+      searchValue: event.target.value,
     });
   };
 
   handleTabChange = (event, value) => {
     this.setState({
-      activeTab: value
+      activeTab: value,
     });
   };
 
-  filterChats = chats => {
+  filterChats = (chats) => {
     const { searchValue } = this.state;
 
     return chats
       .filter(chat =>
-        chat.title.toLowerCase().includes(searchValue.toLowerCase())
-      )
-      .sort(
-        (one, two) =>
-          one.title.toLowerCase() <= two.title.toLowerCase() ? -1 : 1
-      );
+        chat.title.toLowerCase().includes(searchValue.toLowerCase()))
+      .sort((one, two) =>
+        (one.title.toLowerCase() <= two.title.toLowerCase() ? -1 : 1));
   };
 
   render() {
-    const { classes, chats, createChat, isConnected } = this.props;
+    const {
+      classes, chats, createChat, isConnected,
+    } = this.props;
     const { activeTab, searchValue } = this.state;
 
     return (
       <Drawer
         variant="permanent"
         classes={{
-          paper: classes.drawerPaper
+          paper: classes.drawerPaper,
         }}
       >
         <div className={classes.drawerHeader}>

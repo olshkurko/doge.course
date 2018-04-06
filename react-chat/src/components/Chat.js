@@ -1,20 +1,20 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { withStyles } from "material-ui/styles";
-import MessageList from "./MessageList";
-import MessageInput from "./MessageInput";
-//import withStyles from 'material-ui';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { withStyles } from 'material-ui/styles';
+import MessageList from './MessageList';
+import MessageInput from './MessageInput';
+// import withStyles from 'material-ui';
 
-const styles = theme => ({
+const styles = () => ({
   chatLayout: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: "64px",
-    height: "100%",
-    width: "100%",
-    overflow: "hidden"
-  }
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: '64px',
+    height: '100%',
+    width: '100%',
+    overflow: 'hidden',
+  },
 });
 
 const Chat = ({
@@ -24,7 +24,7 @@ const Chat = ({
   activeUser,
   joinChat,
   sendMessage,
-  isConnected
+  isConnected,
 }) => (
   <main className={classes.chatLayout}>
     <MessageList messages={messages} activeUser={activeUser} />
@@ -33,7 +33,7 @@ const Chat = ({
         disabled={!isConnected}
         sendMessage={sendMessage}
         showJoinButton={!activeUser.isChatMember}
-        onJoinButtonClick={() => joinChat(activeChat._id)}
+        onJoinButtonClick={() => joinChat(activeChat._id)} // eslint-disable-line
         activeUser={activeUser}
       />
     )}

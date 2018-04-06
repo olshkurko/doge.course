@@ -1,20 +1,22 @@
-import React from "react";
-import { withStyles } from "material-ui/styles";
-import List from "material-ui/List";
-import Typography from "material-ui/Typography";
-import ChatListItem from "./ChatListItem";
+import React from 'react';
+import { withStyles } from 'material-ui/styles';
+import List from 'material-ui/List';
+import Typography from 'material-ui/Typography';
+import ChatListItem from './ChatListItem';
 
-const styles = theme => ({
+const styles = () => ({
   chatsList: {
-    height: "calc(100% - 56px)",
-    overflowY: "scroll"
+    height: 'calc(100% - 56px)',
+    overflowY: 'scroll',
   },
   noChats: {
-    textAlign: "center"
-  }
+    textAlign: 'center',
+  },
 });
 
-const ChatList = ({ classes, chats, activeChat, disabled }) => (
+const ChatList = ({
+  classes, chats, activeChat, disabled,
+}) => (
   <List className={classes.chatsList}>
     {chats && chats.length ? (
       chats.map(chat => (

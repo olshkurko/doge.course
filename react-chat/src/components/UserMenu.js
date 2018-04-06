@@ -1,45 +1,45 @@
-import React from "react";
-import { withStyles } from "material-ui/styles";
-import IconButton from "material-ui/IconButton";
-import Menu, { MenuItem } from "material-ui/Menu";
-import AccountCircle from "material-ui-icons/AccountCircle";
-import Modal from "material-ui/Modal";
-import Paper from "material-ui/Paper";
-import Typography from "material-ui/Typography";
-import Button from "material-ui/Button";
-import TextField from "material-ui/TextField";
+import React from 'react';
+import { withStyles } from 'material-ui/styles';
+import IconButton from 'material-ui/IconButton';
+import Menu, { MenuItem } from 'material-ui/Menu';
+import AccountCircle from 'material-ui-icons/AccountCircle';
+import Modal from 'material-ui/Modal';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import TextField from 'material-ui/TextField';
 
 const styles = theme => ({
   modalWrapper: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modal: {
-    width: "30%",
-    minWidth: "300px",
-    padding: theme.spacing.unit * 3
-  }
+    width: '30%',
+    minWidth: '300px',
+    padding: theme.spacing.unit * 3,
+  },
 });
 
 class UserMenu extends React.Component {
   state = {
     isModalOpen: false,
     anchorEl: null,
-    username: "",
-    firstName: "",
-    lastName: ""
+    username: '',
+    firstName: '',
+    lastName: '',
   };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       username: nextProps.activeUser.username,
       firstName: nextProps.activeUser.firstName,
-      lastName: nextProps.activeUser.lastName
+      lastName: nextProps.activeUser.lastName,
     });
   }
 
-  handleClick = event => {
+  handleClick = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -47,9 +47,9 @@ class UserMenu extends React.Component {
     this.setState({ anchorEl: null });
   };
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -62,7 +62,7 @@ class UserMenu extends React.Component {
     this.props.onEditProfileClick({
       username: this.state.username,
       firstName: this.state.firstName,
-      lastName: this.state.lastName
+      lastName: this.state.lastName,
     });
     this.toggleEditProfileModal();
   };
@@ -80,7 +80,7 @@ class UserMenu extends React.Component {
       <React.Fragment>
         <IconButton
           color="inherit"
-          aria-owns={anchorEl ? "simple-menu" : null}
+          aria-owns={anchorEl ? 'simple-menu' : null}
           aria-haspopup="true"
           disabled={disabled}
           onClick={this.handleClick}

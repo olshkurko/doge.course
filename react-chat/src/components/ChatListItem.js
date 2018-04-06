@@ -1,14 +1,14 @@
-import React from "react";
-import { withStyles } from "material-ui/styles";
-import moment from "moment";
-import { Link } from "react-router-dom";
-import { ListItem, ListItemText } from "material-ui/List";
-import Avatar from "./Avatar";
+import React from 'react';
+import { withStyles } from 'material-ui/styles';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
+import { ListItem, ListItemText } from 'material-ui/List';
+import Avatar from './Avatar';
 
 const styles = theme => ({
   activeItem: {
-    backgroundColor: theme.palette.grey[200]
-  }
+    backgroundColor: theme.palette.grey[200],
+  },
 });
 
 const ChatListItem = ({
@@ -17,13 +17,13 @@ const ChatListItem = ({
   title,
   chatId,
   active,
-  createdAt
+  createdAt,
 }) => (
   <ListItem
     button
     component={Link}
     to={`/chat/${chatId}`}
-    className={active ? classes.activeItem : ""}
+    className={active ? classes.activeItem : ''}
     disabled={disabled}
   >
     <Avatar colorFrom={chatId}>{title}</Avatar>
