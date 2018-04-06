@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -30,5 +31,13 @@ const ChatListItem = ({
     <ListItemText primary={title} secondary={moment(createdAt).fromNow()} />
   </ListItem>
 );
+ChatListItem.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  disabled: PropTypes.bool.isRequired,
+  active: PropTypes.bool.isRequired,
+  chatId: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(ChatListItem);

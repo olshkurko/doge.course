@@ -40,7 +40,14 @@
     "eslint-plugin-react": "^7.7.0"
   },
   "lint-staged": {
-    "**/*.js": ["npm run lint:fix", "npm run format", "git add"],
-    "**/*.json": ["npm run format", "git add"]
+    "**/*.js": [
+      "npm run lint:fix",
+      "npm run format",
+      "git add"
+    ],
+    "**/*.json": [
+      "npm run format",
+      "git add"
+    ]
   }
 }

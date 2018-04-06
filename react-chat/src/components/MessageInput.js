@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
@@ -10,7 +11,7 @@ const styles = theme => ({
     left: 'auto',
     right: 0,
     bottom: 0,
-    width: 'calc(100% - 360px)',
+    width: 'calc(100% - 320px)',
     padding: theme.spacing.unit * 3,
   },
   messageInput: {
@@ -19,6 +20,14 @@ const styles = theme => ({
 });
 
 class MessageInput extends React.Component {
+  static propTypes = {
+    classes: PropTypes.objectOf(PropTypes.string).isRequired,
+    showJoinButton: PropTypes.bool.isRequired,
+    onJoinButtonClick: PropTypes.func.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+  };
+
   state = {
     value: '',
   };
@@ -34,9 +43,7 @@ class MessageInput extends React.Component {
 
     if (event.key === 'Enter' && value) {
       this.props.sendMessage(value);
-      this.setState({
-        value: '',
-      });
+      this.setState({ value: '' });
     }
   };
 
@@ -48,7 +55,6 @@ class MessageInput extends React.Component {
     return (
       <div className={classes.messageInputWrapper}>
         <Paper className={classes.messageInput} elevation={6}>
-          {' '}
           {showJoinButton ? (
             <Button
               fullWidth
@@ -57,18 +63,18 @@ class MessageInput extends React.Component {
               disabled={disabled}
               onClick={onJoinButtonClick}
             >
-              Join{' '}
+              Join
             </Button>
           ) : (
             <Input
               fullWidth
               placeholder="Type your message…"
-              value={this.state.value}
               disabled={disabled}
+              value={this.state.value}
               onChange={this.handleValueChange}
               onKeyPress={this.handleKeyPress}
             />
-          )}{' '}
+          )}
         </Paper>
       </div>
     );
