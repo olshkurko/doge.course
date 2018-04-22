@@ -81,16 +81,8 @@ const Message = ({
       )}
     >
       {!isMessageFromMe && userAvatar}
-      <Paper
-        className={classNames(
-          classes.message,
-          isMessageFromMe && classes.messageFromMe,
-        )}
-      >
-        <Typography
-          variant="caption"
-          style={{ color: randomColor(sender._id) }}
-        >
+      <Paper className={classNames(classes.message, isMessageFromMe && classes.messageFromMe)}>
+        <Typography variant="caption" style={{ color: randomColor(sender._id) }}>
           {displayedName}
         </Typography>
         <Typography variant="body1">{content}</Typography>

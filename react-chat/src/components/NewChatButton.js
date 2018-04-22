@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Modal from 'material-ui/Modal';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
 
 const styles = theme => ({
   newChatButton: {
     position: 'absolute',
     left: 'auto',
     right: theme.spacing.unit * 3,
-    bottom: (theme.spacing.unit * 3) + 48, // + bottom navigation
+    // eslint-disable-next-line
+    bottom: theme.spacing.unit * 3 + 48, // + bottom navigation
   },
   modalWrapper: {
     display: 'flex',
@@ -27,12 +28,13 @@ const styles = theme => ({
   },
 });
 
-class newChatButton extends React.Component {
+class NewChatButton extends React.Component {
   static propTypes = {
     classes: PropTypes.objectOf(PropTypes.string).isRequired,
     onClick: PropTypes.func.isRequired,
     disabled: PropTypes.bool.isRequired,
   };
+
   state = {
     open: false,
     title: {
@@ -95,11 +97,7 @@ class newChatButton extends React.Component {
         >
           <AddIcon />
         </Button>
-        <Modal
-          open={open}
-          className={classes.modalWrapper}
-          onClose={this.toggleModal}
-        >
+        <Modal open={open} className={classes.modalWrapper} onClose={this.toggleModal}>
           <Paper className={classes.modal}>
             <Typography variant="title" id="modal-title">
               Create new chat
@@ -126,4 +124,4 @@ class newChatButton extends React.Component {
   }
 }
 
-export default withStyles(styles)(newChatButton);
+export default withStyles(styles)(NewChatButton);

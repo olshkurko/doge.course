@@ -1,3 +1,4 @@
+/* eslint no-underscore-dangle: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
@@ -27,7 +28,7 @@ class MessageList extends React.Component {
       content: PropTypes.string.isRequired,
       sender: PropTypes.object.isRequired,
       createdAt: PropTypes.string.isRequired,
-    })).isRequired,
+    })),
     match: PropTypes.shape({
       params: PropTypes.object.isRequired,
     }).isRequired,
@@ -39,6 +40,10 @@ class MessageList extends React.Component {
       isCreator: PropTypes.bool.isRequired,
       isChatMember: PropTypes.bool.isRequired,
     }).isRequired,
+  };
+
+  static defaultProps = {
+    messages: [],
   };
 
   componentDidMount() {
@@ -80,14 +85,12 @@ class MessageList extends React.Component {
     return messages && messages.length ? (
       <div
         className={classes.messagesWrapper}
-        ref={(wrapper) => { this.messagesWrapper = wrapper; }}
+        ref={(wrapper) => {
+          this.messagesWrapper = wrapper;
+        }}
       >
         {messages.map(message => (
-          <Message
-            key={message._id}
-            activeUser={activeUser}
-            {...message}
-          />
+          <Message key={message._id} activeUser={activeUser} {...message} />
         ))}
       </div>
     ) : (

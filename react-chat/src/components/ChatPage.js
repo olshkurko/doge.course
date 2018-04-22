@@ -121,6 +121,8 @@ class ChatPage extends React.Component {
         <Chat
           isConnected={isConnected}
           messages={messages}
+          activeChat={chats.active}
+          activeUser={activeUser}
           sendMessage={sendMessage}
           joinChat={joinChat}
         />

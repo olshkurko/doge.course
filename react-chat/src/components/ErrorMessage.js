@@ -13,7 +13,7 @@ class ErrorMessage extends React.Component {
     error: null,
   };
   state = {
-    open: false,
+    open: !!this.props.error,
   };
 
   componentWillReceiveProps(nextProps) {

@@ -2,33 +2,6 @@ import * as types from '../constants/chats';
 import callApi from '../utils/CallApi';
 import { redirect } from './services';
 
-export function fetchMyChats() {
-  return (dispatch, getState) => {
-    const state = getState();
-    const { isFetching } = state.services;
-    const { token } = state.auth;
-
-    if (isFetching.myChats) {
-      return Promise.resolve();
-    }
-
-    dispatch({
-      type: types.FETCH_MY_CHATS_REQUEST,
-    });
-
-    return callApi('/chats/my', token)
-      .then(data =>
-        dispatch({
-          type: types.FETCH_MY_CHATS_SUCCESS,
-          payload: data,
-        }))
-      .catch(reason =>
-        dispatch({
-          type: types.FETCH_MY_CHATS_FAILURE,
-          payload: reason,
-        }));
-  };
-}
 export function fetchAllChats() {
   return (dispatch, getState) => {
     const state = getState();
@@ -57,11 +30,40 @@ export function fetchAllChats() {
   };
 }
 
+export function fetchMyChats() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const { isFetching } = state.services;
+    const { token } = state.auth;
+
+    if (isFetching.myChats) {
+      return Promise.resolve();
+    }
+
+    dispatch({
+      type: types.FETCH_MY_CHATS_REQUEST,
+    });
+
+    return callApi('/chats/my', token)
+      .then(data =>
+        dispatch({
+          type: types.FETCH_MY_CHATS_SUCCESS,
+          payload: data,
+        }))
+      .catch(reason =>
+        dispatch({
+          type: types.FETCH_MY_CHATS_FAILURE,
+          payload: reason,
+        }));
+  };
+}
+
 export function fetchChat(chatId) {
   return (dispatch, getState) => {
     const state = getState();
     const { isFetching } = state.services;
     const { token } = state.auth;
+
     if (isFetching.chat) {
       return Promise.resolve();
     }
@@ -91,8 +93,8 @@ export function fetchChat(chatId) {
 }
 
 export function setActiveChat(chatId) {
-  return dispatch => dispatch(fetchChat(chatId))
-    .then((data) => {
+  return dispatch =>
+    dispatch(fetchChat(chatId)).then((data) => {
       if (!data) {
         dispatch(redirect('/chat'));
 
@@ -105,7 +107,8 @@ export function setActiveChat(chatId) {
         type: types.SET_ACTIVE_CHAT,
         payload: data,
       });
-      return dispatch(redirect(`/chat/${data.chat._id}`));// eslint-disable-line
+
+      return dispatch(redirect(`/chat/${data.chat._id}`));
     });
 }
 
@@ -150,6 +153,40 @@ export function createChat(title) {
   };
 }
 
+export function joinChat(chatId) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const { isFetching } = state.services;
+    const { token } = state.auth;
+
+    if (isFetching.joinChat) {
+      return Promise.resolve();
+    }
+
+    dispatch({
+      type: types.JOIN_CHAT_REQUEST,
+      payload: { chatId },
+    });
+
+    return callApi(`/chats/${chatId}/join`, token)
+      .then(({ chat }) => {
+        dispatch({
+          type: types.JOIN_CHAT_SUCCESS,
+          payload: { chat },
+        });
+
+        dispatch(redirect(`/chat/${chat._id}`));
+
+        return chat;
+      })
+      .catch(reason =>
+        dispatch({
+          type: types.JOIN_CHAT_FAILURE,
+          payload: reason,
+        }));
+  };
+}
+
 export function leaveChat(chatId) {
   return (dispatch, getState) => {
     const state = getState();
@@ -183,40 +220,6 @@ export function leaveChat(chatId) {
       .catch(reason =>
         dispatch({
           type: types.LEAVE_CHAT_FAILURE,
-          payload: reason,
-        }));
-  };
-}
-
-export function joinChat(chatId) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const { isFetching } = state.services;
-    const { token } = state.auth;
-
-    if (isFetching.joinChat) {
-      return Promise.resolve();
-    }
-
-    dispatch({
-      type: types.JOIN_CHAT_REQUEST,
-      payload: { chatId },
-    });
-
-    return callApi(`/chats/${chatId}/join`, token)
-      .then(({ chat }) => {
-        dispatch({
-          type: types.JOIN_CHAT_SUCCESS,
-          payload: { chat },
-        });
-
-        dispatch(redirect(`/chat/${chat._id}`));
-
-        return chat;
-      })
-      .catch(reason =>
-        dispatch({
-          type: types.JOIN_CHAT_FAILURE,
           payload: reason,
         }));
   };

@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
-// import withStyles from 'material-ui';
 
 const styles = () => ({
   chatLayout: {
@@ -34,12 +33,14 @@ const Chat = ({
         disabled={!isConnected}
         sendMessage={sendMessage}
         showJoinButton={!activeUser.isChatMember}
-        onJoinButtonClick={() => joinChat(activeChat._id)} // eslint-disable-line
+        // eslint-disable-next-line
+        onJoinButtonClick={() => joinChat(activeChat._id)}
         activeUser={activeUser}
       />
     )}
   </main>
 );
+
 Chat.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   messages: PropTypes.arrayOf(PropTypes.shape({
