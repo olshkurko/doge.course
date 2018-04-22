@@ -25,7 +25,12 @@ function RaisedButtons(props) {
       <Button variant="raised" color="secondary" className={classes.button}>
         Secondary
       </Button>
-      <Button variant="raised" color="secondary" disabled className={classes.button}>
+      <Button
+        variant="raised"
+        color="secondary"
+        disabled
+        className={classes.button}
+      >
         Disabled
       </Button>
       <input
@@ -44,7 +49,9 @@ function RaisedButtons(props) {
   );
 }
 
-RaisedButtons.propTypes = {
+
+
+ RaisedButtons.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 

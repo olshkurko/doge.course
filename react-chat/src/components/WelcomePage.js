@@ -1,37 +1,56 @@
-
 import React from 'react';
-import { withStyles } from 'material-ui';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography'
+import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Login from './Login';
 import Signup from './Signup';
+import ErrorMessage from './ErrorMessage';
+
 const styles = theme => ({
   paper: {
-    marginTop: 64 + theme.spacing.unit * 3,
+    marginTop: (theme.spacing.unit * 3) + 64,
     width: 500,
   },
   tabContent: {
     padding: theme.spacing.unit * 3,
-  }
-})
+  },
+});
 
 class WelcomePage extends React.Component {
+  static propTypes = {
+    classes: PropTypes.objectOf(PropTypes.string).isRequired,
+    signup: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+    recieveAuth: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    error: PropTypes.instanceOf(Error),
+  };
   state = {
     activeTab: 0,
+  };
+
+  componentDidMount() {
+    this.props.recieveAuth();
   }
 
   handleTabChage = (event, value) => {
     this.setState({ activeTab: value });
-  }
+  };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes, signup, login, isAuthenticated, error,
+    } = this.props;
     const { activeTab } = this.state;
-
+    if (isAuthenticated) {
+      return <Redirect to="/chat" />;
+    }
     return (
       <React.Fragment>
         <AppBar>
@@ -55,12 +74,13 @@ class WelcomePage extends React.Component {
                 </Tabs>
               </AppBar>
               <div className={classes.tabContent}>
-                {activeTab === 0 && <Login />}
-                {activeTab === 1 && <Signup />}
+                {activeTab === 0 && <Login onSubmit={login} />}
+                {activeTab === 1 && <Signup onSubmit={signup} />}
               </div>
             </Paper>
           </Grid>
         </Grid>
+        <ErrorMessage error={error} />
       </React.Fragment>
     );
   }

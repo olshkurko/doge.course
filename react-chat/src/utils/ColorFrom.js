@@ -12,10 +12,20 @@ import deepOrange from 'material-ui/colors/deepOrange';
 import deepPurple from 'material-ui/colors/deepPurple';
 import blueGrey from 'material-ui/colors/blueGrey';
 
-
 const colors = [
-  cyan, pink, purple, indigo, blue, teal, green, lightGreen, amber,
-  orange, deepOrange, deepPurple, blueGrey
+  cyan,
+  pink,
+  purple,
+  indigo,
+  blue,
+  teal,
+  green,
+  lightGreen,
+  amber,
+  orange,
+  deepOrange,
+  deepPurple,
+  blueGrey,
 ];
 
 export default function colorFrom(string) {
@@ -30,6 +40,7 @@ export default function colorFrom(string) {
 
     return colors[colorIndex][400];
   } catch (e) {
+    // eslint-disable-next-line
     console.error(e);
     return blueGrey[400];
   }
